@@ -1,4 +1,4 @@
-# work-schedule — Implementation Plan
+# work-schedule — Implementation Plan.
 
 > **Module:** `github.com/veltylabs/work-schedule`
 > **Package:** `workschedule`
