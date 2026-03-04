@@ -5,6 +5,7 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/tinywasm/mcp"
 	"github.com/tinywasm/sqlite"
 )
 
@@ -153,4 +154,44 @@ func TestGetWorkSchedule_DBFailure(t *testing.T) {
 	if err == nil {
 		t.Fatalf("expected error due to DB failure, got nil")
 	}
+}
+
+func TestGetMCPToolsMetadata(t *testing.T) {
+	m := setupTestModule(t)
+
+	metadata := m.GetMCPToolsMetadata()
+	if len(metadata) != 1 {
+		t.Fatalf("expected 1 tool metadata, got %d", len(metadata))
+	}
+
+	tool := metadata[0]
+	if tool.Name != "get_work_schedule" {
+		t.Errorf("expected tool name 'get_work_schedule', got %q", tool.Name)
+	}
+	if tool.Description != "Returns the work calendar for a staff member." {
+		t.Errorf("expected correct description, got %q", tool.Description)
+	}
+
+	if len(tool.Parameters) != 1 {
+		t.Fatalf("expected 1 parameter, got %d", len(tool.Parameters))
+	}
+
+	param := tool.Parameters[0]
+	if param.Name != "staff_id" {
+		t.Errorf("expected param name 'staff_id', got %q", param.Name)
+	}
+	if param.Type != "number" {
+		t.Errorf("expected param type 'number', got %q", param.Type)
+	}
+	if !param.Required {
+		t.Errorf("expected param to be required")
+	}
+
+	if tool.Execute == nil {
+		t.Errorf("expected tool.Execute to be assigned")
+	}
+
+	// Verify that RegisterTools does not panic
+	srv := mcp.NewMCPServer("test", "1.0")
+	m.RegisterTools(srv)
 }

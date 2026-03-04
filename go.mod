@@ -9,6 +9,7 @@ require (
 	github.com/ncruces/go-strftime v1.0.0 // indirect
 	github.com/remyoudompheng/bigfft v0.0.0-20230129092748-24d4a6f8daec // indirect
 	github.com/tinywasm/fmt v0.18.6 // indirect
+	github.com/tinywasm/mcp v0.0.4 // indirect
 	github.com/tinywasm/orm v0.1.4 // indirect
 	github.com/tinywasm/sqlite v0.1.3 // indirect
 	golang.org/x/sys v0.41.0 // indirect
