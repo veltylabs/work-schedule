@@ -6,6 +6,7 @@ import (
 	"context"
 
 	"github.com/tinywasm/fmt"
+	"github.com/tinywasm/mcp"
 	"github.com/tinywasm/orm"
 )
 
@@ -14,6 +15,30 @@ type Module struct {
 }
 
 func New(db *orm.DB) *Module { return &Module{db: db} }
+
+func (m *Module) GetMCPToolsMetadata() []mcp.ToolMetadata {
+	return []mcp.ToolMetadata{
+		{
+			Name:        "get_work_schedule",
+			Description: "Returns the work calendar for a staff member.",
+			Parameters: []mcp.ParameterMetadata{
+				{
+					Name:        "staff_id",
+					Description: "The staff member's numeric ID.",
+					Required:    true,
+					Type:        "number",
+				},
+			},
+			Execute: m.GetWorkSchedule,
+		},
+	}
+}
+
+// RegisterTools registers all work-schedule MCP tools on the given server.
+// Call once during application startup after New(db).
+func (m *Module) RegisterTools(srv *mcp.MCPServer) {
+	srv.RegisterProvider(m)
+}
 
 // GetWorkSchedule returns the work calendar for a staff member.
 // Signature matches ToolHandler: func(context.Context, map[string]any) (any, error)
