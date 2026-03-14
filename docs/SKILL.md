@@ -9,7 +9,7 @@ Exposes a single MCP tool (`get_work_schedule`) that returns a staff member's we
 |------|------|
 | `model.go` | `Staff` + `WorkCalendar` structs, both `TableName()` methods |
 | `model_orm.go` | Auto-generated ORM helpers — DO NOT EDIT |
-| `mcp.go` | `Module`, `New(db)`, `GetMCPToolsMetadata()`, `RegisterTools()`, `GetWorkSchedule()`, `buildStaffResponse()` |
+| `mcp.go` | `Module`, `New(db)`, `GetMCPTools()`, `RegisterTools()`, `GetWorkSchedule()`, `buildStaffResponse()` |
 | `mcp_test.go` | All tests (`workschedule` package, `:memory:` SQLite) |
 
 ## Constraints

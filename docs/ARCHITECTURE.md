@@ -13,7 +13,7 @@ Reads from two legacy tables maintained by an external system.
 1. **Read-Only / No DDL:** This module does NOT call `db.CreateTable()`. Tables are managed
    by the legacy system. `New(db)` is side-effect free apart from storing the DB reference.
 2. **Dependency Injection:** `New(db *orm.DB)` returns `*Module`. No global state.
-3. **MCP Self-Registration:** `*Module` implements `mcp.ToolProvider` via `GetMCPToolsMetadata()`.
+3. **MCP Self-Registration:** `*Module` implements `mcp.ToolProvider` via `GetMCPTools()`.
    Registered via `RegisterTools(srv)`.
 4. **Safe Conversion:** `staff_id` from MCP args is converted via `fmt.Convert(raw).Int64()`
    to safely handle both `float64` (JSON default) and `int64` inputs.
