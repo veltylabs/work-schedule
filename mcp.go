@@ -29,7 +29,7 @@ func (m *Module) GetWorkSchedule(ctx context.Context, args map[string]any) (any,
 
 	staffModel := &Staff{}
 	staffRow, err := ReadOneStaff(
-		m.db.Query(staffModel).Where(StaffMeta.ID).Eq(staffID),
+		m.db.Query(staffModel).Where(Staff_.ID).Eq(staffID),
 		staffModel,
 	)
 	if err != nil || staffRow == nil {
@@ -38,8 +38,8 @@ func (m *Module) GetWorkSchedule(ctx context.Context, args map[string]any) (any,
 
 	calRows, err := ReadAllWorkCalendar(
 		m.db.Query(&WorkCalendar{}).
-			Where(WorkCalendarMeta.StaffID).Eq(staffID).
-			OrderBy(WorkCalendarMeta.DayOfWeek).Asc(),
+			Where(WorkCalendar_.StaffID).Eq(staffID).
+			OrderBy(WorkCalendar_.DayOfWeek).Asc(),
 	)
 	if err != nil {
 		return nil, err

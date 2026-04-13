@@ -3,9 +3,9 @@ module github.com/veltylabs/work-schedule
 go 1.25.2
 
 require (
-	github.com/tinywasm/fmt v0.18.6
-	github.com/tinywasm/orm v0.1.4
-	github.com/tinywasm/sqlite v0.1.3
+	github.com/tinywasm/fmt v0.22.2
+	github.com/tinywasm/orm v0.6.0
+	github.com/tinywasm/sqlite v0.2.0
 )
 
 require (
